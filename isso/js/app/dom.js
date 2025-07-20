@@ -91,6 +91,7 @@ function Element(node) {
     this.checked = function() { return node.checked; };
 
     this.setAttribute = function(key, value) { node.setAttribute(key, value) };
+    this.removeAttribute = function(key) { node.removeAttribute(key) };
     this.getAttribute = function(key) { return node.getAttribute(key) };
 
     this.classList = node.classList;

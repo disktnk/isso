@@ -13,7 +13,7 @@ var html = function (globals) {
           <p class='isso-input-wrapper'>
             <input id='isso-postbox-author' type='text' name='author' placeholder='${i18n('postbox-author-placeholder')}' value='${author ? author : ''}' />
           </p>
-          <div style="display: none;">
+          <div style='display: none;'>
           <p class='isso-input-wrapper'>
             <input id='isso-postbox-email' type='email' name='email' placeholder='${i18n('postbox-email-placeholder')}' value='${email ? email : ''}' />
           </p>
@@ -23,8 +23,8 @@ var html = function (globals) {
           </div>
         </div>
         <div class='isso-textarea-wrapper'>
-          <textarea class='isso-textarea' rows='5' minlength='1' maxlength='65535' placeholder='${i18n('postbox-text')}'oninput="this.style.height = ''; this.style.height = this.scrollHeight + 'px'"></textarea>
-          <div class='isso-preview'>
+          <textarea class='isso-textarea' rows='5' minlength='1' maxlength='65535' placeholder='${i18n('postbox-text')}'"></textarea>
+          <div class='isso-preview' style="display: none;">
             <div class='isso-comment'>
               <div class='isso-text-wrapper'>
                 <div class='isso-text'></div>
@@ -34,14 +34,16 @@ var html = function (globals) {
         </div>
         <div class='isso-submit-wrapper'>
           <p class='isso-post-action'>
-            <input type='submit' value='${i18n('postbox-submit')}' />
+            <input type='submit' value='${i18n('postbox-submit')}' disabled />
           </p>
+          <div style='display: none;'>
           <p class='isso-post-action'>
             <input type='button' name='preview' value='${i18n('postbox-preview')}' />
           </p>
           <p class='isso-post-action'>
             <input type='button' name='edit' value='${i18n('postbox-edit')}' />
           </p>
+          </div>
         </div>
         <div class='isso-notification-section'>
           <label>

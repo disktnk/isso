@@ -146,8 +146,21 @@ var Postbox = function(parent) {
             textarea.obj.style.height = `${textarea.obj.scrollHeight}px`;
         };
         textarea.on('input', adjustHeight);
-    }
 
+        const submitButton = $("[type=submit]", el);
+        if (submitButton) {
+            const activeCheck = () => {
+                if (textarea.value.length < 3) {
+                    submitButton.setAttribute("disabled", "");
+                    submitButton.obj.style.backgroundColor = "#e3e3e3";
+                } else {
+                    submitButton.obj.removeAttribute("disabled");
+                    submitButton.obj.style.backgroundColor = "#000";
+                }
+            }
+            textarea.on('input', activeCheck);
+        }
+    }
     return el;
 };
 
