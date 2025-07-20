@@ -138,29 +138,37 @@ var Postbox = function(parent) {
         }
     });
 
-    // adjust textarea height on input
+    // textarea actions
     const textarea = $(".isso-textarea", el);
-    if (textarea) {
-        const adjustHeight = () => {
-            textarea.obj.style.height = 'auto';
-            textarea.obj.style.height = `${textarea.obj.scrollHeight}px`;
-        };
-        textarea.on('input', adjustHeight);
+    textarea.on('input', () => {
+        textarea.obj.style.height = 'auto';
+        textarea.obj.style.height = `${textarea.obj.scrollHeight}px`;
+    });
 
-        const submitButton = $("[type=submit]", el);
-        if (submitButton) {
-            const activeCheck = () => {
-                if (textarea.value.length < 3) {
-                    submitButton.setAttribute("disabled", "");
-                    submitButton.obj.style.backgroundColor = "#e3e3e3";
-                } else {
-                    submitButton.obj.removeAttribute("disabled");
-                    submitButton.obj.style.backgroundColor = "#000";
-                }
-            }
-            textarea.on('input', activeCheck);
+    const submitButton = $("[type=submit]", el);
+    textarea.on('input', () => {
+        if (textarea.value.length < 3) {
+            submitButton.setAttribute("disabled", "");
+            submitButton.obj.style.backgroundColor = "#e3e3e3";
+        } else {
+            submitButton.obj.removeAttribute("disabled");
+            submitButton.obj.style.backgroundColor = "#000";
         }
-    }
+    });
+
+    textarea.on("focus", function() {
+        $(".isso-submit-wrapper", el).obj.style.display = "flex";
+        $(".isso-submit-wrapper", el).obj.style.backgroundColor = "#f9f9f9";
+        $(".isso-textarea-wrapper", el).obj.style.backgroundColor = "#f9f9f9";
+        adjustHeight();
+    });
+    textarea.on("blur", function() {
+        if (textarea.value.length === 0) {
+            $(".isso-submit-wrapper", el).obj.style.display = "none";
+        }
+        $(".isso-submit-wrapper", el).obj.style.backgroundColor = "#f2f2f2";
+        $(".isso-textarea-wrapper", el).obj.style.backgroundColor = "#f2f2f2";
+        });
     return el;
 };
 

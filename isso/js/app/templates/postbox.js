@@ -32,7 +32,7 @@ var html = function (globals) {
             </div>
           </div>
         </div>
-        <div class='isso-submit-wrapper'>
+        <div class='isso-submit-wrapper' style='display: none;'>
           <p class='isso-post-action'>
             <input type='submit' value='${i18n('postbox-submit')}' disabled />
           </p>
