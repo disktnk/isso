@@ -233,6 +233,9 @@ h4.isso-thread-heading {
     display: block;
     padding: 0;
 }
+.isso-auth-section {
+    margin-bottom: 15px;
+}
 .isso-textarea,
 .isso-preview {
     margin: 0 0 .3em;
@@ -243,9 +246,20 @@ h4.isso-thread-heading {
     box-shadow: 0 1px 2px var(--isso-box-shadow-color);
 }
 .isso-textarea {
-    outline: 0;
+    outline: none;
     width: 100%;
+    height: 3em;
     resize: none;
+    font-size: 0.8em;
+    border: none;
+    color: #6b6b6b;
+    background-color: #f2f2f2;
+    overflow: hidden;
+}
+.isso-textarea:focus {
+    outline: none;
+    background-color: #f9f9f9;
+    height: auto; /* Allow dynamic height adjustment */
 }
 .isso-form-wrapper input[type=checkbox] {
     vertical-align: middle;
@@ -265,7 +279,8 @@ h4.isso-thread-heading {
 .isso-textarea:focus,
 .isso-input-wrapper input:focus,
 .isso-auth-section input:focus {
-    outline: 2px solid var(--isso-input-outline-color);
+    outline: none;
+    background-color: #f9f9f9;
 }
 .isso-input-wrapper {
     display: inline-block;
@@ -277,10 +292,9 @@ h4.isso-thread-heading {
     padding: .3em 10px;
     max-width: 100%;
     border-radius: 3px;
-    background-color: var(--isso-input-background-color);
-    line-height: 1.4em;
-    border: var(--isso-border);
-    box-shadow: 0 1px 2px var(--isso-box-shadow-color);
+    background-color: #f2f2f2;
+    border: none;
+    font-size: 0.8em;
 }
 .isso-input-wrapper label {
     display: block;

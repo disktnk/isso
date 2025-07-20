@@ -9,8 +9,21 @@ var html = function (globals) {
   var template = `
     <div class='isso-postbox'>
       <div class='isso-form-wrapper'>
+        <div class='isso-auth-section'>
+          <p class='isso-input-wrapper'>
+            <input id='isso-postbox-author' type='text' name='author' placeholder='${i18n('postbox-author-placeholder')}' value='${author ? author : ''}' />
+          </p>
+          <div style="display: none;">
+          <p class='isso-input-wrapper'>
+            <input id='isso-postbox-email' type='email' name='email' placeholder='${i18n('postbox-email-placeholder')}' value='${email ? email : ''}' />
+          </p>
+          <p class='isso-input-wrapper'>
+            <input id='isso-postbox-website' type='text' name='website' placeholder='${i18n('postbox-website-placeholder')}' value='${website ? website : ''}' />
+          </p>
+          </div>
+        </div>
         <div class='isso-textarea-wrapper'>
-          <textarea class='isso-textarea' rows='5' minlength='3' maxlength='65535' placeholder='${i18n('postbox-text')}'></textarea>
+          <textarea class='isso-textarea' rows='5' minlength='1' maxlength='65535' placeholder='${i18n('postbox-text')}'oninput="this.style.height = ''; this.style.height = this.scrollHeight + 'px'"></textarea>
           <div class='isso-preview'>
             <div class='isso-comment'>
               <div class='isso-text-wrapper'>
@@ -19,19 +32,7 @@ var html = function (globals) {
             </div>
           </div>
         </div>
-        <div class='isso-auth-section'>
-          <p class='isso-input-wrapper'>
-            <label for='isso-postbox-author'>${i18n('postbox-author')}</label>
-            <input id='isso-postbox-author' type='text' name='author' placeholder='${i18n('postbox-author-placeholder')}' value='${author ? author : ''}' />
-          </p>
-          <p class='isso-input-wrapper'>
-            <label for='isso-postbox-email'>${i18n('postbox-email')}</label>
-            <input id='isso-postbox-email' type='email' name='email' placeholder='${i18n('postbox-email-placeholder')}' value='${email ? email : ''}' />
-          </p>
-          <p class='isso-input-wrapper'>
-            <label for='isso-postbox-website'>${i18n('postbox-website')}</label>
-            <input id='isso-postbox-website' type='text' name='website' placeholder='${i18n('postbox-website-placeholder')}' value='${website ? website : ''}' />
-          </p>
+        <div class='isso-submit-wrapper'>
           <p class='isso-post-action'>
             <input type='submit' value='${i18n('postbox-submit')}' />
           </p>

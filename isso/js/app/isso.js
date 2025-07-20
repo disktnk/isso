@@ -138,6 +138,16 @@ var Postbox = function(parent) {
         }
     });
 
+    // adjust textarea height on input
+    const textarea = $(".isso-textarea", el);
+    if (textarea) {
+        const adjustHeight = () => {
+            textarea.obj.style.height = 'auto';
+            textarea.obj.style.height = `${textarea.obj.scrollHeight}px`;
+        };
+        textarea.on('input', adjustHeight);
+    }
+
     return el;
 };
 
