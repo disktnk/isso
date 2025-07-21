@@ -142,21 +142,24 @@ var Postbox = function(parent) {
 
     // textarea actions
     const textarea = $(".isso-textarea", el);
+    const authorBox = $("[name=author]", el);
+    const submitButton = $("[type=submit]", el);
     textarea.on('input', () => {
         textarea.obj.style.height = 'auto';
         textarea.obj.style.height = `${textarea.obj.scrollHeight}px`;
     });
 
-    const submitButton = $("[type=submit]", el);
-    textarea.on('input', () => {
-        if (textarea.value.length < 3) {
+    const enableSubmit = () => {
+        if (textarea.value.length < 3 || authorBox.value.length < 1) {
             submitButton.setAttribute("disabled", "");
             submitButton.obj.style.backgroundColor = "#e3e3e3";
         } else {
             submitButton.obj.removeAttribute("disabled");
             submitButton.obj.style.backgroundColor = "#000";
         }
-    });
+    }
+    textarea.on('input', enableSubmit);
+    authorBox.on('input', enableSubmit);
 
     textarea.on("focus", function() {
         $(".isso-submit-wrapper", el).obj.style.display = "flex";
