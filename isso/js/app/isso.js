@@ -63,8 +63,10 @@ var Postbox = function(parent) {
 
     // author is not optional if this config parameter is set
     if (config["require-author"]) {
-      $("[for='isso-postbox-author']", el).textContent =
-        $("[for='isso-postbox-author']", el).textContent.replace(/ \(.*\)/, "");
+        const authorLabel = $("[for='isso-postbox-author']", el);
+        if (authorLabel) {
+            authorLabel.textContent = authorLabel.textContent.replace(/ \(.*\)/, "");
+        }
     }
 
     // preview function
