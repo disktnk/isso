@@ -160,7 +160,6 @@ var Postbox = function(parent) {
         $(".isso-submit-wrapper", el).obj.style.display = "flex";
         $(".isso-submit-wrapper", el).obj.style.backgroundColor = "#f9f9f9";
         $(".isso-textarea-wrapper", el).obj.style.backgroundColor = "#f9f9f9";
-        adjustHeight();
     });
     textarea.on("blur", function() {
         if (textarea.value.length === 0) {
