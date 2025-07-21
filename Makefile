@@ -40,7 +40,7 @@ SASS = sassc
 
 ISSO_IMAGE ?= isso:latest
 ISSO_RELEASE_IMAGE ?= isso:release
-ISSO_DOCKER_REGISTRY ?= ghcr.io/isso-comments
+ISSO_DOCKER_REGISTRY ?= ghcr.io/disktnk
 TESTBED_IMAGE ?= isso-js-testbed:latest
 
 all: js site
