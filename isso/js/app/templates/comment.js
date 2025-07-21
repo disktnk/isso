@@ -10,6 +10,30 @@ var html = function (globals) {
   var isPageAuthor = conf["page-author-hashes"].indexOf(comment.hash) > -1;
   var pageAuthorClass = (isPageAuthor ? " isso-is-page-author" : '');
 
+  const formatDate = (date) => {
+    const commentDate = new Date(date * 1000);
+    const tooltipDate = commentDate.toLocaleDateString('en-US', {
+      month: 'short',
+      day: '2-digit',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false
+    });
+    const displayDate = commentDate.toLocaleDateString('en-US', {
+        month: 'short',
+        day: '2-digit'
+    });
+
+    return {
+      tooltip: tooltipDate,
+      display: displayDate,
+    };
+  };
+
+  const dateFormats = formatDate(comment.created);
+
   var template = `
 <div class='isso-comment${pageAuthorClass}' id='isso-${comment.id}' data-hash='${comment.hash}'>
   ${conf.gravatar ? `<div class='isso-avatar'><img src='${comment.gravatar_image}'></div>` : ''}
@@ -17,10 +41,9 @@ var html = function (globals) {
   <div class='isso-text-wrapper'>
     <div class='isso-comment-header'>
       ${comment.website ? `<a class='isso-author' href='${comment.website}' rel='nofollow'>${author}</a>` : `<span class='isso-author'>${author}</span>`}
-      ${isPageAuthor ? `<span class='isso-spacer'>&bull;</span><span class='isso-page-author-suffix'>${i18n('comment-page-author-suffix')}</span>` : ''}
-      <span class='isso-spacer'>&bull;</span>
+      ${isPageAuthor ? `<span class='isso-spacer'>&bull;</span><span class='isso-page-author-suffix'>${i18n('comment-page-author-suffix')}</span>` : ''}<br>
       <a class='isso-permalink' href='#isso-${comment.id}'>
-        <time title='${humanize(comment.created)}' datetime='${datetime(comment.created)}'>${humanize(comment.created)}</time>
+        <time title='${dateFormats.tooltip}' datetime='${datetime(comment.created)}'>${dateFormats.display}</time>
       </a>
       <span class='isso-note'>
         ${comment.mode == 2 ? i18n('comment-queued') : (comment.mode == 4 ? i18n('comment-deleted') : '')}

@@ -86,7 +86,7 @@ h4.isso-thread-heading {
 .isso-avatar {
     display: block;
     float: left;
-    margin: 0.95em 0.95em 0;
+    margin: 0.5em 0.75em 0 0.5em;
 }
 .isso-avatar svg {
     max-width: 32px;
@@ -99,7 +99,7 @@ h4.isso-thread-heading {
 }
 .isso-text-wrapper {
     display: block;
-    padding: 0.95em;
+    padding: 0.25em;
 }
 .isso-follow-up {
     padding-left: calc(7% + 20px);
@@ -159,6 +159,7 @@ h4.isso-thread-heading {
 .isso-text h6 {
     font-size: 130%;
     font-weight: bold;
+    margin-top: 5px;
 }
 .isso-text pre {
     background: var(--isso-pre-background-color);
@@ -182,7 +183,7 @@ h4.isso-thread-heading {
 }
 .isso-feedlink,
 .isso-comment-footer a {
-    text-decoration: none;
+    text-decoration: underline;
 }
 .isso-feedlink:hover,
 .isso-comment-footer a:hover {

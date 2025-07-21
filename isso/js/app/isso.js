@@ -222,8 +222,14 @@ var insert = function({ comment, scrollIntoView, offset }) {
 
     // update datetime every 60 seconds
     var refresh = function() {
-        $(".isso-permalink > time", el).textContent = i18n.ago(
-            globals.offset.localTime(), new Date(parseInt(comment.created, 10) * 1000));
+        const now = globals.offset.localTime();
+        const commentTime = new Date(parseInt(comment.created, 10) * 1000);
+        const diffTime = now - commentTime;
+        const diffDays = diffTime / (1000 * 60 * 60 * 24);
+        if (diffDays >= 1) {
+            return;
+        }
+        $(".isso-permalink > time", el).textContent = i18n.ago(now, commentTime);
         setTimeout(refresh, 60*1000);
     };
 
