@@ -63,8 +63,10 @@ var Postbox = function(parent) {
 
     // author is not optional if this config parameter is set
     if (config["require-author"]) {
-      $("[for='isso-postbox-author']", el).textContent =
-        $("[for='isso-postbox-author']", el).textContent.replace(/ \(.*\)/, "");
+        const authorLabel = $("[for='isso-postbox-author']", el);
+        if (authorLabel) {
+            authorLabel.textContent = authorLabel.textContent.replace(/ \(.*\)/, "");
+        }
     }
 
     // preview function
@@ -138,6 +140,39 @@ var Postbox = function(parent) {
         }
     });
 
+    // textarea actions
+    const textarea = $(".isso-textarea", el);
+    const authorBox = $("[name=author]", el);
+    const submitButton = $("[type=submit]", el);
+    textarea.on('input', () => {
+        textarea.obj.style.height = 'auto';
+        textarea.obj.style.height = `${textarea.obj.scrollHeight}px`;
+    });
+
+    const enableSubmit = () => {
+        if (textarea.value.length < 3 || authorBox.value.length < 1) {
+            submitButton.setAttribute("disabled", "");
+            submitButton.obj.style.backgroundColor = "#e3e3e3";
+        } else {
+            submitButton.obj.removeAttribute("disabled");
+            submitButton.obj.style.backgroundColor = "#000";
+        }
+    }
+    textarea.on('input', enableSubmit);
+    authorBox.on('input', enableSubmit);
+
+    textarea.on("focus", function() {
+        $(".isso-submit-wrapper", el).obj.style.display = "flex";
+        $(".isso-submit-wrapper", el).obj.style.backgroundColor = "#f9f9f9";
+        $(".isso-textarea-wrapper", el).obj.style.backgroundColor = "#f9f9f9";
+    });
+    textarea.on("blur", function() {
+        if (textarea.value.length === 0) {
+            $(".isso-submit-wrapper", el).obj.style.display = "none";
+        }
+        $(".isso-submit-wrapper", el).obj.style.backgroundColor = "#f2f2f2";
+        $(".isso-textarea-wrapper", el).obj.style.backgroundColor = "#f2f2f2";
+        });
     return el;
 };
 
@@ -191,8 +226,14 @@ var insert = function({ comment, scrollIntoView, offset }) {
 
     // update datetime every 60 seconds
     var refresh = function() {
-        $(".isso-permalink > time", el).textContent = i18n.ago(
-            globals.offset.localTime(), new Date(parseInt(comment.created, 10) * 1000));
+        const now = globals.offset.localTime();
+        const commentTime = new Date(parseInt(comment.created, 10) * 1000);
+        const diffTime = now - commentTime;
+        const diffDays = diffTime / (1000 * 60 * 60 * 24);
+        if (diffDays >= 1) {
+            return;
+        }
+        $(".isso-permalink > time", el).textContent = i18n.ago(now, commentTime);
         setTimeout(refresh, 60*1000);
     };
 

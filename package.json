@@ -11,7 +11,8 @@
     "test-screenshots": "jest --runInBand --config isso/js/jest-integration.config.js isso/js/tests/screenshots/",
     "build-dev": "webpack --config isso/js/webpack.config.js --config-name dev",
     "watch-dev": "webpack --config isso/js/webpack.config.js --config-name dev --watch",
-    "build-prod": "webpack --config isso/js/webpack.config.js --merge --config-name dev --config-name prod"
+    "build-prod": "webpack --config isso/js/webpack.config.js --merge --config-name dev --config-name prod",
+    "watch-prod": "webpack --config isso/js/webpack.config.js --watch --merge --config-name dev --config-name prod"
   },
   "devDependencies": {
     "webpack": "^5.89.0",
