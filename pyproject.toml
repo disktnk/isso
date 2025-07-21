@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "isso"
+version = "0.13.0" # Replace with the actual version
+description = "A lightweight commenting server similar to Disqus"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "Isso Maintainers", email = "maintainers@isso-comments.de"}
+]
+requires-python = ">=3.8"
+dependencies = [
+    "bleach>=6.1.0",
+    "distlib>=0.3.9",
+    "filelock>=3.16.1",
+    "gunicorn>=23.0.0",
+    "html5lib>=1.1",
+    "itsdangerous>=2.2.0",
+    "jinja2>=3.1.6",
+    "misaka>=2.1.1",
+    "platformdirs>=4.3.6",
+    "setuptools>=75.3.2",
+    "werkzeug>=3.0.6",
+]
