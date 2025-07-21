@@ -54,8 +54,8 @@
     margin: 0;
 }
 h4.isso-thread-heading {
-    color: var(--isso-primary-text-color);
     font-weight: bold;
+    padding: 0.5em 0
 }
 .isso-feedlink {
     float: right;

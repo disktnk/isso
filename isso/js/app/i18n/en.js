@@ -1,7 +1,7 @@
 module.exports = {
-    "postbox-text": "Type Comment Here (at least 3 chars)",
+    "postbox-text": "Say something...",
     "postbox-author": "Name (optional)",
-    "postbox-author-placeholder": "John Doe",
+    "postbox-author-placeholder": "Name",
     "postbox-email": "E-mail (optional)",
     "postbox-email-placeholder": "johndoe@example.com",
     "postbox-website": "Website (optional)",
@@ -11,8 +11,8 @@ module.exports = {
     "postbox-submit": "Submit",
     "postbox-notification": "Subscribe to email notification of replies",
 
-    "num-comments": "One Comment\n{{ n }} Comments",
-    "no-comments": "No Comments Yet",
+    "num-comments": "Comments ({{ n }})",
+    "no-comments": "Comments",
     "atom-feed": "Atom feed",
 
     "comment-reply": "Reply",
