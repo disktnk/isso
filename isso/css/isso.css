@@ -247,11 +247,6 @@ h4.isso-thread-heading {
     margin-bottom: 0px;
     padding: .4em .8em;
 }
-.isso-textarea:focus {
-    outline: none;
-    background-color: #f9f9f9;
-    height: auto;
-}
 .isso-form-wrapper input[type=checkbox] {
     vertical-align: middle;
     position: relative;
@@ -270,7 +265,6 @@ h4.isso-thread-heading {
 .isso-textarea:focus,
 .isso-input-wrapper input:focus,
 .isso-auth-section input:focus {
-    outline: none;
     background-color: #f9f9f9;
 }
 .isso-input-wrapper {
@@ -295,7 +289,7 @@ h4.isso-thread-heading {
 .isso-submit-wrapper {
     display: flex;
     gap: 0;
-    justify-content: flex-end;
+    justify-content: space-between;
     background-color: #f9f9f9;
     margin-top: 0;
     padding: 0;
@@ -318,6 +312,49 @@ h4.isso-thread-heading {
     cursor: not-allowed;
 }
 
+.isso-submit-tools {
+    display: flex;
+    padding-left: 1em;
+}
+
+.isso-submit-operation {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.isso-preview-stack {
+    position: relative;
+    width: 32px;
+    height: 32px;
+}
+
+.isso-preview-button,
+.isso-edit-button {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 32px;
+    height: 32px;
+    margin-top: 0.15em;
+    border: none;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.isso-preview-button:hover,
+.isso-edit-button:hover {
+    background-color: var(--isso-button-hover-background-color);
+}
+
+.isso-preview-button svg,
+.isso-edit-button svg {
+    width: 20px;
+    height: 20px;
+}
+
 /* ========================================================================== */
 /* Postbox (preview mode)                                                     */
 /* ========================================================================== */
@@ -326,6 +363,7 @@ h4.isso-thread-heading {
 .isso-postbox.isso-preview-mode > .isso-form-wrapper input[name="preview"],
 .isso-postbox.isso-preview-mode > .isso-form-wrapper .isso-textarea {
     display: none;
+    height: auto;
 }
 .isso-postbox.isso-preview-mode > .isso-form-wrapper .isso-preview {
     display: block;
@@ -334,7 +372,7 @@ h4.isso-thread-heading {
     display: inline;
 }
 .isso-preview {
-    background: var(--isso-preview-background);
+    background: #f9f9f9
 }
 
 /* ========================================================================== */

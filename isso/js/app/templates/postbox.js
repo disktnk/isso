@@ -4,6 +4,7 @@ var html = function (globals) {
   var author = globals.author;
   var email = globals.email;
   var website = globals.website;
+  var svg = globals.svg;
   var notify = conf["reply-notifications-default-enabled"] ? " checked" : '';
 
   var template = `
@@ -24,7 +25,7 @@ var html = function (globals) {
         </div>
         <div class='isso-textarea-wrapper'>
           <textarea class='isso-textarea' rows='5' minlength='1' maxlength='65535' placeholder='${i18n('postbox-text')}'"></textarea>
-          <div class='isso-preview' style="display: none;">
+          <div class='isso-preview'>
             <div class='isso-comment'>
               <div class='isso-text-wrapper'>
                 <div class='isso-text'></div>
@@ -33,16 +34,16 @@ var html = function (globals) {
           </div>
         </div>
         <div class='isso-submit-wrapper' style='display: none;'>
-          <p class='isso-post-action'>
-            <input type='submit' value='${i18n('postbox-submit')}' disabled />
-          </p>
-          <div style='display: none;'>
-          <p class='isso-post-action'>
-            <input type='button' name='preview' value='${i18n('postbox-preview')}' />
-          </p>
-          <p class='isso-post-action'>
-            <input type='button' name='edit' value='${i18n('postbox-edit')}' />
-          </p>
+          <div class="isso-submit-tools">
+            <p class='isso-post-action isso-preview-stack'>
+              <button name='preview' title='${i18n('postbox-preview')}' class='isso-preview-button'>${svg['eye']}</button>
+              <button name='edit' title='${i18n('postbox-edit')}' class='isso-edit-button'  style='visibility: hidden;'>${svg['edit']}</button>
+            </p>
+          </div>
+          <div class='isso-submit-operation'>
+            <p class='isso-post-action'>
+              <input type='submit' value='${i18n('postbox-submit')}' disabled />
+            </p>
           </div>
         </div>
         <div class='isso-notification-section'>
