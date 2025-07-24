@@ -69,13 +69,23 @@ var Postbox = function(parent) {
         }
     }
 
-    // preview function
-    $("[name='preview']", el).on("click", function() {
+    let preventBlur = false;
+    const previewButton = $("[name='preview']", el);
+    const editButton = $("[name='edit']", el);
+
+    // preview function, to prevent the textarea from losing focus and prioritize the preview button
+    previewButton.on("mousedown", function(e) {
+        e.preventDefault();
+        preventBlur = true;
+    });
+    previewButton.on("click", function() {
         api.preview($(".isso-textarea", el).value).then(
             function(html) {
                 $(".isso-preview .isso-text", el).innerHTML = html;
                 el.classList.add('isso-preview-mode');
             });
+        editButton.obj.style.visibility = "visible";
+        previewButton.obj.style.visibility = "hidden";
     });
 
     // edit function
@@ -83,14 +93,56 @@ var Postbox = function(parent) {
         $(".isso-preview .isso-text", el).innerHTML = '';
         el.classList.remove('isso-preview-mode');
     };
-    $("[name='edit']", el).on("click", function() {
-      edit();
-      $(".isso-textarea", el).focus();
+    editButton.on("click", function() {
+        edit();
+        editButton.obj.style.visibility = "hidden";
+        previewButton.obj.style.visibility = "visible";
+        $(".isso-textarea", el).focus();
     });
     $(".isso-preview", el).on("click", function() {
-      edit();
-      $(".isso-textarea", el).focus();
+        edit();
+        editButton.obj.style.visibility = "hidden";
+        previewButton.obj.style.visibility = "visible";
+        $(".isso-textarea", el).focus();
     });
+
+    // textarea actions
+    const textarea = $(".isso-textarea", el);
+    const authorBox = $("[name=author]", el);
+    const submitButton = $("[type=submit]", el);
+    textarea.on('input', () => {
+        textarea.obj.style.height = `${textarea.obj.scrollHeight}px`;
+    });
+
+    const enableSubmit = () => {
+        if (textarea.value.length < 3 || authorBox.value.length < 1) {
+            submitButton.setAttribute("disabled", "");
+            submitButton.obj.style.backgroundColor = "#e3e3e3";
+        } else {
+            submitButton.obj.removeAttribute("disabled");
+            submitButton.obj.style.backgroundColor = "#000";
+        }
+    }
+    textarea.on('input', enableSubmit);
+    authorBox.on('input', enableSubmit);
+
+    textarea.on("focus", function() {
+        $(".isso-submit-wrapper", el).obj.style.display = "flex";
+        $(".isso-submit-wrapper", el).obj.style.backgroundColor = "#f9f9f9";
+        $(".isso-textarea-wrapper", el).obj.style.backgroundColor = "#f9f9f9";
+    });
+    const resetSubmitArea = function() {
+        if (preventBlur) {
+            preventBlur = false;
+            return;
+        }
+        if (textarea.value.length === 0) {
+            $(".isso-submit-wrapper", el).obj.style.display = "none";
+        }
+        $(".isso-submit-wrapper", el).obj.style.backgroundColor = "#f2f2f2";
+        $(".isso-textarea-wrapper", el).obj.style.backgroundColor = "#f2f2f2";
+    }
+    textarea.on("blur", resetSubmitArea);
 
     // submit form, initialize optional fields with `null` and reset form.
     // If replied to a comment, remove form completely.
@@ -128,6 +180,9 @@ var Postbox = function(parent) {
                     }
 
                     submitButton.disabled = false;
+
+                    resetSubmitArea();
+                    textarea.obj.style.height = "3em";
                 },
                 function(err) {
                     console.error(err);
@@ -140,39 +195,6 @@ var Postbox = function(parent) {
         }
     });
 
-    // textarea actions
-    const textarea = $(".isso-textarea", el);
-    const authorBox = $("[name=author]", el);
-    const submitButton = $("[type=submit]", el);
-    textarea.on('input', () => {
-        textarea.obj.style.height = 'auto';
-        textarea.obj.style.height = `${textarea.obj.scrollHeight}px`;
-    });
-
-    const enableSubmit = () => {
-        if (textarea.value.length < 3 || authorBox.value.length < 1) {
-            submitButton.setAttribute("disabled", "");
-            submitButton.obj.style.backgroundColor = "#e3e3e3";
-        } else {
-            submitButton.obj.removeAttribute("disabled");
-            submitButton.obj.style.backgroundColor = "#000";
-        }
-    }
-    textarea.on('input', enableSubmit);
-    authorBox.on('input', enableSubmit);
-
-    textarea.on("focus", function() {
-        $(".isso-submit-wrapper", el).obj.style.display = "flex";
-        $(".isso-submit-wrapper", el).obj.style.backgroundColor = "#f9f9f9";
-        $(".isso-textarea-wrapper", el).obj.style.backgroundColor = "#f9f9f9";
-    });
-    textarea.on("blur", function() {
-        if (textarea.value.length === 0) {
-            $(".isso-submit-wrapper", el).obj.style.display = "none";
-        }
-        $(".isso-submit-wrapper", el).obj.style.backgroundColor = "#f2f2f2";
-        $(".isso-textarea-wrapper", el).obj.style.backgroundColor = "#f2f2f2";
-        });
     return el;
 };
 
