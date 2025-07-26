@@ -138,6 +138,7 @@ var Postbox = function(parent) {
         }
         if (textarea.value.length === 0) {
             $(".isso-submit-wrapper", el).obj.style.display = "none";
+            textarea.obj.style.height = "3em";
         }
         $(".isso-submit-wrapper", el).obj.style.backgroundColor = "#f2f2f2";
         $(".isso-textarea-wrapper", el).obj.style.backgroundColor = "#f2f2f2";
@@ -182,7 +183,6 @@ var Postbox = function(parent) {
                     submitButton.disabled = false;
 
                     resetSubmitArea();
-                    textarea.obj.style.height = "3em";
                 },
                 function(err) {
                     console.error(err);
